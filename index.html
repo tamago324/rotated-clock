@@ -146,12 +146,12 @@
                 const marker = document.createElement('div');
                 marker.style.position = 'absolute';
                 marker.style.width = '4px';
-                marker.style.height = '40px';
+                marker.style.height = '60px';
                 marker.style.background = '#333';
                 marker.style.borderRadius = '2px';
                 
                 const angle = (i * 30 - 90) * Math.PI / 180;
-                const innerRadius = containerSize * 0.45;
+                const innerRadius = containerSize * 0.38;  // 内側を数字に近づける
                 const outerRadius = containerSize * 0.48;
                 
                 const x1 = centerOffset + innerRadius * Math.cos(angle);
@@ -180,7 +180,7 @@
                     marker.style.borderRadius = '1px';
                     
                     const angle = (i * 6 - 90) * Math.PI / 180;
-                    const innerRadius = containerSize * 0.46;
+                    const innerRadius = containerSize * 0.44;  // 内側を少し長く
                     const outerRadius = containerSize * 0.48;
                     
                     const x1 = centerOffset + innerRadius * Math.cos(angle);
