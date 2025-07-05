@@ -3,6 +3,7 @@
 *.jpeg
 *.gif
 *.bmp
+image.png
 
 # OS Files
 .DS_Store
