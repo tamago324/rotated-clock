@@ -101,29 +101,6 @@
             z-index: 1;
         }
         
-        .hour-marker {
-            position: absolute;
-            width: 4px;
-            height: 40px;
-            background: #333;
-            border-radius: 2px;
-            top: 20px;
-            left: 50%;
-            transform-origin: 50% 280px;
-            transform: translateX(-50%);
-        }
-        
-        .minute-marker {
-            position: absolute;
-            width: 2px;
-            height: 20px;
-            background: #666;
-            border-radius: 1px;
-            top: 30px;
-            left: 50%;
-            transform-origin: 50% 270px;
-            transform: translateX(-50%);
-        }
         
         .number {
             position: absolute;
@@ -131,14 +108,6 @@
             font-weight: bold;
             color: #333;
             font-family: 'Arial', sans-serif;
-        }
-        
-        .rotated-number {
-            transform: rotate(90deg);
-        }
-        
-        .normal-number {
-            transform: none;
         }
     </style>
 </head>
@@ -168,19 +137,64 @@
         function createMarkers() {
             const hourMarkersContainer = document.getElementById('hourMarkers');
             const minuteMarkersContainer = document.getElementById('minuteMarkers');
+            const clockContainer = document.querySelector('.clock-container');
+            const containerSize = clockContainer.offsetWidth;
+            const centerOffset = containerSize / 2;
             
+            // 時間の目盛り
             for (let i = 0; i < 12; i++) {
                 const marker = document.createElement('div');
-                marker.className = 'hour-marker';
-                marker.style.transform = `translateX(-50%) rotate(${i * 30}deg)`;
+                marker.style.position = 'absolute';
+                marker.style.width = '4px';
+                marker.style.height = '40px';
+                marker.style.background = '#333';
+                marker.style.borderRadius = '2px';
+                
+                const angle = (i * 30 - 90) * Math.PI / 180;
+                const innerRadius = containerSize * 0.45;
+                const outerRadius = containerSize * 0.48;
+                
+                const x1 = centerOffset + innerRadius * Math.cos(angle);
+                const y1 = centerOffset + innerRadius * Math.sin(angle);
+                const x2 = centerOffset + outerRadius * Math.cos(angle);
+                const y2 = centerOffset + outerRadius * Math.sin(angle);
+                
+                marker.style.left = `${x1}px`;
+                marker.style.top = `${y1}px`;
+                marker.style.width = '4px';
+                marker.style.height = `${Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1))}px`;
+                marker.style.transform = `translate(-50%, 0) rotate(${i * 30 + 90}deg)`;
+                marker.style.transformOrigin = '50% 0';
+                
                 hourMarkersContainer.appendChild(marker);
             }
             
+            // 分の目盛り
             for (let i = 0; i < 60; i++) {
                 if (i % 5 !== 0) {
                     const marker = document.createElement('div');
-                    marker.className = 'minute-marker';
-                    marker.style.transform = `translateX(-50%) rotate(${i * 6}deg)`;
+                    marker.style.position = 'absolute';
+                    marker.style.width = '2px';
+                    marker.style.height = '20px';
+                    marker.style.background = '#666';
+                    marker.style.borderRadius = '1px';
+                    
+                    const angle = (i * 6 - 90) * Math.PI / 180;
+                    const innerRadius = containerSize * 0.46;
+                    const outerRadius = containerSize * 0.48;
+                    
+                    const x1 = centerOffset + innerRadius * Math.cos(angle);
+                    const y1 = centerOffset + innerRadius * Math.sin(angle);
+                    const x2 = centerOffset + outerRadius * Math.cos(angle);
+                    const y2 = centerOffset + outerRadius * Math.sin(angle);
+                    
+                    marker.style.left = `${x1}px`;
+                    marker.style.top = `${y1}px`;
+                    marker.style.width = '2px';
+                    marker.style.height = `${Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1))}px`;
+                    marker.style.transform = `translate(-50%, 0) rotate(${i * 6 + 90}deg)`;
+                    marker.style.transformOrigin = '50% 0';
+                    
                     minuteMarkersContainer.appendChild(marker);
                 }
             }
@@ -188,6 +202,9 @@
         
         function createNumbers() {
             const numbersContainer = document.getElementById('numbers');
+            const clockContainer = document.querySelector('.clock-container');
+            const containerSize = clockContainer.offsetWidth;
+            const centerOffset = containerSize / 2;
             
             // 90度回転した時間の数字（1-12）
             // 12が上（0度）、3が右（90度）、6が下（180度）、9が左（270度）の位置に配置
@@ -201,14 +218,14 @@
                 const adjustedPosition = rotatedPosition === 0 ? 12 : rotatedPosition;
                 
                 const angle = (adjustedPosition * 30 - 90) * Math.PI / 180;
-                const radius = 240;
-                const x = radius * Math.cos(angle);
-                const y = radius * Math.sin(angle);
+                const radius = containerSize * 0.40; // 時計の40%の位置
+                const x = centerOffset + radius * Math.cos(angle);
+                const y = centerOffset + radius * Math.sin(angle);
                 
-                number.style.left = `calc(50% + ${x}px - 16px)`;
-                number.style.top = `calc(50% + ${y}px - 20px)`;
-                
-                number.classList.add('rotated-number');
+                number.style.position = 'absolute';
+                number.style.left = `${x}px`;
+                number.style.top = `${y}px`;
+                number.style.transform = 'translate(-50%, -50%) rotate(90deg)';
                 
                 numbersContainer.appendChild(number);
             }
@@ -219,17 +236,18 @@
                 minuteNumber.className = 'number';
                 minuteNumber.style.fontSize = '20px';
                 minuteNumber.style.color = '#888';
-                minuteNumber.textContent = i * 5;
+                minuteNumber.textContent = i === 12 ? 60 : i * 5;
                 
                 // 通常の位置計算（分の数字）
                 const angle = (i * 30 - 90) * Math.PI / 180;
-                const radius = 180;
-                const x = radius * Math.cos(angle);
-                const y = radius * Math.sin(angle);
+                const radius = containerSize * 0.32; // 時計の32%の位置
+                const x = centerOffset + radius * Math.cos(angle);
+                const y = centerOffset + radius * Math.sin(angle);
                 
-                minuteNumber.style.left = `calc(50% + ${x}px - 12px)`;
-                minuteNumber.style.top = `calc(50% + ${y}px - 15px)`;
-                minuteNumber.classList.add('normal-number');
+                minuteNumber.style.position = 'absolute';
+                minuteNumber.style.left = `${x}px`;
+                minuteNumber.style.top = `${y}px`;
+                minuteNumber.style.transform = 'translate(-50%, -50%)';
                 
                 numbersContainer.appendChild(minuteNumber);
             }
@@ -254,6 +272,15 @@
         }
         
         document.addEventListener('DOMContentLoaded', initializeClock);
+        
+        // ウィンドウサイズ変更時に再描画
+        window.addEventListener('resize', () => {
+            document.getElementById('hourMarkers').innerHTML = '';
+            document.getElementById('minuteMarkers').innerHTML = '';
+            document.getElementById('numbers').innerHTML = '';
+            createMarkers();
+            createNumbers();
+        });
     </script>
 </body>
 </html>
