@@ -456,6 +456,10 @@
             const minuteHand = document.getElementById('minuteHand');
             const secondHand = document.getElementById('secondHand');
             
+            // すべての針を同じ中心点から出すように統一
+            const centerOrigin = '50% 80%';
+            const centerTransform = 'translate(-50%, -80%)';
+            
             if (isSmallMobile) {
                 hourHand.style.cssText = `
                     position: absolute;
@@ -465,8 +469,8 @@
                     border-radius: 3px;
                     top: 50%;
                     left: 50%;
-                    transform-origin: 50% 78%;
-                    transform: translate(-50%, -78%) rotate(${hourAngle}deg);
+                    transform-origin: ${centerOrigin};
+                    transform: ${centerTransform} rotate(${hourAngle}deg);
                     z-index: 3;
                 `;
                 minuteHand.style.cssText = `
@@ -477,8 +481,8 @@
                     border-radius: 2px;
                     top: 50%;
                     left: 50%;
-                    transform-origin: 50% 75%;
-                    transform: translate(-50%, -75%) rotate(${minuteAngle}deg);
+                    transform-origin: ${centerOrigin};
+                    transform: ${centerTransform} rotate(${minuteAngle}deg);
                     z-index: 2;
                 `;
                 secondHand.style.cssText = `
@@ -489,8 +493,8 @@
                     border-radius: 1px;
                     top: 50%;
                     left: 50%;
-                    transform-origin: 50% 73%;
-                    transform: translate(-50%, -73%) rotate(${secondAngle}deg);
+                    transform-origin: ${centerOrigin};
+                    transform: ${centerTransform} rotate(${secondAngle}deg);
                     z-index: 1;
                 `;
             } else if (isMobile) {
@@ -502,8 +506,8 @@
                     border-radius: 3px;
                     top: 50%;
                     left: 50%;
-                    transform-origin: 50% 78%;
-                    transform: translate(-50%, -78%) rotate(${hourAngle}deg);
+                    transform-origin: ${centerOrigin};
+                    transform: ${centerTransform} rotate(${hourAngle}deg);
                     z-index: 3;
                 `;
                 minuteHand.style.cssText = `
@@ -514,8 +518,8 @@
                     border-radius: 2px;
                     top: 50%;
                     left: 50%;
-                    transform-origin: 50% 75%;
-                    transform: translate(-50%, -75%) rotate(${minuteAngle}deg);
+                    transform-origin: ${centerOrigin};
+                    transform: ${centerTransform} rotate(${minuteAngle}deg);
                     z-index: 2;
                 `;
                 secondHand.style.cssText = `
@@ -526,14 +530,48 @@
                     border-radius: 1px;
                     top: 50%;
                     left: 50%;
-                    transform-origin: 50% 73%;
-                    transform: translate(-50%, -73%) rotate(${secondAngle}deg);
+                    transform-origin: ${centerOrigin};
+                    transform: ${centerTransform} rotate(${secondAngle}deg);
                     z-index: 1;
                 `;
             } else {
-                hourHand.style.transform = `translate(-50%, -80%) rotate(${hourAngle}deg)`;
-                minuteHand.style.transform = `translate(-50%, -77%) rotate(${minuteAngle}deg)`;
-                secondHand.style.transform = `translate(-50%, -75%) rotate(${secondAngle}deg)`;
+                // デスクトップサイズでも同じ中心点
+                hourHand.style.cssText = `
+                    position: absolute;
+                    width: 6px;
+                    height: 180px;
+                    background: #333;
+                    border-radius: 3px;
+                    top: 50%;
+                    left: 50%;
+                    transform-origin: ${centerOrigin};
+                    transform: ${centerTransform} rotate(${hourAngle}deg);
+                    z-index: 3;
+                `;
+                minuteHand.style.cssText = `
+                    position: absolute;
+                    width: 4px;
+                    height: 220px;
+                    background: #666;
+                    border-radius: 2px;
+                    top: 50%;
+                    left: 50%;
+                    transform-origin: ${centerOrigin};
+                    transform: ${centerTransform} rotate(${minuteAngle}deg);
+                    z-index: 2;
+                `;
+                secondHand.style.cssText = `
+                    position: absolute;
+                    width: 2px;
+                    height: 240px;
+                    background: #e74c3c;
+                    border-radius: 1px;
+                    top: 50%;
+                    left: 50%;
+                    transform-origin: ${centerOrigin};
+                    transform: ${centerTransform} rotate(${secondAngle}deg);
+                    z-index: 1;
+                `;
             }
         }
         
