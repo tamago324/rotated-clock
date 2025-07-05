@@ -113,6 +113,79 @@
         .hour-number {
             font-size: 42px;
         }
+        
+        .help-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .help-button:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.1);
+        }
+        
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            margin: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            line-height: 1.6;
+        }
+        
+        .modal h2 {
+            margin-top: 0;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .modal p {
+            margin-bottom: 15px;
+            color: #666;
+        }
+        
+        .close-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        
+        .close-button:hover {
+            background: #764ba2;
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-blue-400 to-purple-500">
@@ -127,6 +200,25 @@
             <div id="hourMarkers"></div>
             <div id="minuteMarkers"></div>
             <div id="numbers"></div>
+        </div>
+    </div>
+    
+    <button class="help-button" onclick="showModal()">?</button>
+    
+    <div id="helpModal" class="modal" onclick="hideModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <h2>90度回転時計について</h2>
+            <p><strong>この時計の特徴：</strong></p>
+            <p>• <strong>時間（短針）</strong>：90度右に回転しています<br>
+            　→ 9時が12時の位置、12時が3時の位置に表示</p>
+            <p>• <strong>分（長針）と秒針</strong>：通常の時計と同じ動きです</p>
+            <p>• <strong>背景色</strong>：時間帯に応じて自動的に変化します</p>
+            
+            <p><strong>なぜこの時計を作ったのか：</strong></p>
+            <p>午前中に早く起きても、なぜか午前中の時間をだらだらと過ごしてしまうことがありました。</p>
+            <p>9時が12時の位置に来ることで、「もう12時だ！」という感覚になり、午前中の時間をより大切に使えるのではないかと考えて作りました。</p>
+            
+            <button class="close-button" onclick="hideModal()">閉じる</button>
         </div>
     </div>
     
@@ -272,6 +364,15 @@
                 `translate(-50%, -75%) rotate(${secondAngle}deg)`;
         }
         
+        function showModal() {
+            document.getElementById('helpModal').style.display = 'flex';
+        }
+        
+        function hideModal(event) {
+            if (event && event.target !== event.currentTarget) return;
+            document.getElementById('helpModal').style.display = 'none';
+        }
+        
         document.addEventListener('DOMContentLoaded', initializeClock);
         
         // ウィンドウサイズ変更時に再描画
@@ -281,6 +382,13 @@
             document.getElementById('numbers').innerHTML = '';
             createMarkers();
             createNumbers();
+        });
+        
+        // ESCキーでモーダルを閉じる
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                hideModal();
+            }
         });
     </script>
 </body>
