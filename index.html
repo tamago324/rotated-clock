@@ -109,6 +109,10 @@
             color: #333;
             font-family: 'Arial', sans-serif;
         }
+        
+        .hour-number {
+            font-size: 42px;
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-blue-400 to-purple-500">
@@ -206,7 +210,7 @@
             // 12が上（0度）、3が右（90度）、6が下（180度）、9が左（270度）の位置に配置
             for (let i = 1; i <= 12; i++) {
                 const number = document.createElement('div');
-                number.className = 'number';
+                number.className = 'number hour-number';
                 number.textContent = i;
                 
                 // 90度回転: 12→3の位置, 3→6の位置, 6→9の位置, 9→12の位置
