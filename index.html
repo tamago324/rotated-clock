@@ -73,20 +73,20 @@
             
             .hour-hand {
                 width: 4px !important;
-                height: 120px !important;
-                transform-origin: 50% 75% !important;
+                height: 130px !important;
+                transform-origin: 50% 80% !important;
             }
             
             .minute-hand {
                 width: 3px !important;
-                height: 150px !important;
-                transform-origin: 50% 73% !important;
+                height: 160px !important;
+                transform-origin: 50% 77% !important;
             }
             
             .second-hand {
                 width: 1px !important;
-                height: 160px !important;
-                transform-origin: 50% 70% !important;
+                height: 170px !important;
+                transform-origin: 50% 75% !important;
             }
             
             .clock-center {
@@ -249,17 +249,20 @@
             
             .hour-hand {
                 width: 3px !important;
-                height: 100px !important;
+                height: 110px !important;
+                transform-origin: 50% 80% !important;
             }
             
             .minute-hand {
                 width: 2px !important;
-                height: 130px !important;
+                height: 135px !important;
+                transform-origin: 50% 77% !important;
             }
             
             .second-hand {
                 width: 1px !important;
-                height: 140px !important;
+                height: 145px !important;
+                transform-origin: 50% 75% !important;
             }
             
             .hour-number {
@@ -329,7 +332,7 @@
         .hour-hand {
             position: absolute;
             width: 6px;
-            height: 180px;
+            height: 200px;
             background: #333;
             border-radius: 3px;
             top: 50%;
@@ -342,7 +345,7 @@
         .minute-hand {
             position: absolute;
             width: 4px;
-            height: 220px;
+            height: 250px;
             background: #666;
             border-radius: 2px;
             top: 50%;
@@ -355,7 +358,7 @@
         .second-hand {
             position: absolute;
             width: 2px;
-            height: 240px;
+            height: 270px;
             background: #e74c3c;
             border-radius: 1px;
             top: 50%;
@@ -639,40 +642,40 @@
             
             if (isSmallMobile) {
                 hourHand.style.cssText = `
-                    position: absolute;
-                    width: 5px;
-                    height: 140px;
-                    background: #333;
-                    border-radius: 3px;
-                    top: 50%;
-                    left: 50%;
-                    transform-origin: ${hourOrigin};
-                    transform: ${hourTransform} rotate(${hourAngle}deg);
-                    z-index: 3;
+                    position: absolute !important;
+                    width: 3px !important;
+                    height: 110px !important;
+                    background: #333 !important;
+                    border-radius: 3px !important;
+                    top: 50% !important;
+                    left: 50% !important;
+                    transform-origin: ${hourOrigin} !important;
+                    transform: ${hourTransform} rotate(${hourAngle}deg) !important;
+                    z-index: 3 !important;
                 `;
                 minuteHand.style.cssText = `
-                    position: absolute;
-                    width: 3px;
-                    height: 180px;
-                    background: #666;
-                    border-radius: 2px;
-                    top: 50%;
-                    left: 50%;
-                    transform-origin: ${minuteOrigin};
-                    transform: ${minuteTransform} rotate(${minuteAngle}deg);
-                    z-index: 2;
+                    position: absolute !important;
+                    width: 2px !important;
+                    height: 135px !important;
+                    background: #666 !important;
+                    border-radius: 2px !important;
+                    top: 50% !important;
+                    left: 50% !important;
+                    transform-origin: ${minuteOrigin} !important;
+                    transform: ${minuteTransform} rotate(${minuteAngle}deg) !important;
+                    z-index: 2 !important;
                 `;
                 secondHand.style.cssText = `
-                    position: absolute;
-                    width: 2px;
-                    height: 200px;
-                    background: #e74c3c;
-                    border-radius: 1px;
-                    top: 50%;
-                    left: 50%;
-                    transform-origin: ${secondOrigin};
-                    transform: ${secondTransform} rotate(${secondAngle}deg);
-                    z-index: 1;
+                    position: absolute !important;
+                    width: 1px !important;
+                    height: 145px !important;
+                    background: #e74c3c !important;
+                    border-radius: 1px !important;
+                    top: 50% !important;
+                    left: 50% !important;
+                    transform-origin: ${secondOrigin} !important;
+                    transform: ${secondTransform} rotate(${secondAngle}deg) !important;
+                    z-index: 1 !important;
                 `;
             } else if (isSmallMobileLandscape) {
                 hourHand.style.cssText = `
@@ -713,40 +716,40 @@
                 `;
             } else if (isMobile) {
                 hourHand.style.cssText = `
-                    position: absolute;
-                    width: 5px;
-                    height: 150px;
-                    background: #333;
-                    border-radius: 3px;
-                    top: 50%;
-                    left: 50%;
-                    transform-origin: ${hourOrigin};
-                    transform: ${hourTransform} rotate(${hourAngle}deg);
-                    z-index: 3;
+                    position: absolute !important;
+                    width: 4px !important;
+                    height: 130px !important;
+                    background: #333 !important;
+                    border-radius: 3px !important;
+                    top: 50% !important;
+                    left: 50% !important;
+                    transform-origin: ${hourOrigin} !important;
+                    transform: ${hourTransform} rotate(${hourAngle}deg) !important;
+                    z-index: 3 !important;
                 `;
                 minuteHand.style.cssText = `
-                    position: absolute;
-                    width: 4px;
-                    height: 190px;
-                    background: #666;
-                    border-radius: 2px;
-                    top: 50%;
-                    left: 50%;
-                    transform-origin: ${minuteOrigin};
-                    transform: ${minuteTransform} rotate(${minuteAngle}deg);
-                    z-index: 2;
+                    position: absolute !important;
+                    width: 3px !important;
+                    height: 160px !important;
+                    background: #666 !important;
+                    border-radius: 2px !important;
+                    top: 50% !important;
+                    left: 50% !important;
+                    transform-origin: ${minuteOrigin} !important;
+                    transform: ${minuteTransform} rotate(${minuteAngle}deg) !important;
+                    z-index: 2 !important;
                 `;
                 secondHand.style.cssText = `
-                    position: absolute;
-                    width: 2px;
-                    height: 210px;
-                    background: #e74c3c;
-                    border-radius: 1px;
-                    top: 50%;
-                    left: 50%;
-                    transform-origin: ${secondOrigin};
-                    transform: ${secondTransform} rotate(${secondAngle}deg);
-                    z-index: 1;
+                    position: absolute !important;
+                    width: 1px !important;
+                    height: 170px !important;
+                    background: #e74c3c !important;
+                    border-radius: 1px !important;
+                    top: 50% !important;
+                    left: 50% !important;
+                    transform-origin: ${secondOrigin} !important;
+                    transform: ${secondTransform} rotate(${secondAngle}deg) !important;
+                    z-index: 1 !important;
                 `;
             } else if (isLargeMobileLandscape) {
                 hourHand.style.cssText = `
@@ -827,7 +830,7 @@
                 hourHand.style.cssText = `
                     position: absolute;
                     width: 6px;
-                    height: 180px;
+                    height: 200px;
                     background: #333;
                     border-radius: 3px;
                     top: 50%;
@@ -839,7 +842,7 @@
                 minuteHand.style.cssText = `
                     position: absolute;
                     width: 4px;
-                    height: 220px;
+                    height: 250px;
                     background: #666;
                     border-radius: 2px;
                     top: 50%;
@@ -851,7 +854,7 @@
                 secondHand.style.cssText = `
                     position: absolute;
                     width: 2px;
-                    height: 240px;
+                    height: 270px;
                     background: #e74c3c;
                     border-radius: 1px;
                     top: 50%;
