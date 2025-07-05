@@ -1,0 +1,48 @@
+<svg width="192" height="192" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="96" cy="96" r="88" fill="#2563eb" stroke="#1e40af" stroke-width="8"/>
+  
+  <!-- Clock face -->
+  <circle cx="96" cy="96" r="72" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+  
+  <!-- Hour markers -->
+  <g stroke="#374151" stroke-width="3">
+    <!-- 12 o'clock -->
+    <line x1="96" y1="32" x2="96" y2="42"/>
+    <!-- 3 o'clock -->
+    <line x1="160" y1="96" x2="150" y2="96"/>
+    <!-- 6 o'clock -->
+    <line x1="96" y1="160" x2="96" y2="150"/>
+    <!-- 9 o'clock -->
+    <line x1="32" y1="96" x2="42" y2="96"/>
+  </g>
+  
+  <!-- Minute markers -->
+  <g stroke="#9ca3af" stroke-width="1.5">
+    <!-- 1 o'clock -->
+    <line x1="126.3" y1="38.7" x2="122.5" y2="42.5"/>
+    <!-- 2 o'clock -->
+    <line x1="153.3" y1="69.7" x2="149.5" y2="73.5"/>
+    <!-- 4 o'clock -->
+    <line x1="153.3" y1="122.3" x2="149.5" y2="118.5"/>
+    <!-- 5 o'clock -->
+    <line x1="126.3" y1="153.3" x2="122.5" y2="149.5"/>
+    <!-- 7 o'clock -->
+    <line x1="65.7" y1="153.3" x2="69.5" y2="149.5"/>
+    <!-- 8 o'clock -->
+    <line x1="38.7" y1="122.3" x2="42.5" y2="118.5"/>
+    <!-- 10 o'clock -->
+    <line x1="38.7" y1="69.7" x2="42.5" y2="73.5"/>
+    <!-- 11 o'clock -->
+    <line x1="65.7" y1="38.7" x2="69.5" y2="42.5"/>
+  </g>
+  
+  <!-- Hour hand (pointing to 3) -->
+  <line x1="96" y1="96" x2="126" y2="96" stroke="#1f2937" stroke-width="6" stroke-linecap="round"/>
+  
+  <!-- Minute hand (pointing to 12) -->
+  <line x1="96" y1="96" x2="96" y2="48" stroke="#374151" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Center dot -->
+  <circle cx="96" cy="96" r="6" fill="#1f2937"/>
+</svg>
