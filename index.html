@@ -145,25 +145,23 @@
             for (let i = 0; i < 12; i++) {
                 const marker = document.createElement('div');
                 marker.style.position = 'absolute';
-                marker.style.width = '4px';
-                marker.style.height = '60px';
                 marker.style.background = '#333';
                 marker.style.borderRadius = '2px';
                 
-                const angle = (i * 30 - 90) * Math.PI / 180;
-                const innerRadius = containerSize * 0.38;  // 内側を数字に近づける
+                const angle = (i * 30) * Math.PI / 180;
+                const innerRadius = containerSize * 0.38;
                 const outerRadius = containerSize * 0.48;
                 
-                const x1 = centerOffset + innerRadius * Math.cos(angle);
-                const y1 = centerOffset + innerRadius * Math.sin(angle);
-                const x2 = centerOffset + outerRadius * Math.cos(angle);
-                const y2 = centerOffset + outerRadius * Math.sin(angle);
+                // 中心から外側に向かう線を描画
+                const length = outerRadius - innerRadius;
+                const centerX = centerOffset + innerRadius * Math.sin(angle);
+                const centerY = centerOffset - innerRadius * Math.cos(angle);
                 
-                marker.style.left = `${x1}px`;
-                marker.style.top = `${y1}px`;
                 marker.style.width = '4px';
-                marker.style.height = `${Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1))}px`;
-                marker.style.transform = `translate(-50%, 0) rotate(${i * 30 + 90}deg)`;
+                marker.style.height = `${length}px`;
+                marker.style.left = `${centerX}px`;
+                marker.style.top = `${centerY}px`;
+                marker.style.transform = `translate(-50%, 0) rotate(${i * 30}deg)`;
                 marker.style.transformOrigin = '50% 0';
                 
                 hourMarkersContainer.appendChild(marker);
@@ -174,25 +172,23 @@
                 if (i % 5 !== 0) {
                     const marker = document.createElement('div');
                     marker.style.position = 'absolute';
-                    marker.style.width = '2px';
-                    marker.style.height = '20px';
                     marker.style.background = '#666';
                     marker.style.borderRadius = '1px';
                     
-                    const angle = (i * 6 - 90) * Math.PI / 180;
-                    const innerRadius = containerSize * 0.44;  // 内側を少し長く
+                    const angle = (i * 6) * Math.PI / 180;
+                    const innerRadius = containerSize * 0.44;
                     const outerRadius = containerSize * 0.48;
                     
-                    const x1 = centerOffset + innerRadius * Math.cos(angle);
-                    const y1 = centerOffset + innerRadius * Math.sin(angle);
-                    const x2 = centerOffset + outerRadius * Math.cos(angle);
-                    const y2 = centerOffset + outerRadius * Math.sin(angle);
+                    // 中心から外側に向かう線を描画
+                    const length = outerRadius - innerRadius;
+                    const centerX = centerOffset + innerRadius * Math.sin(angle);
+                    const centerY = centerOffset - innerRadius * Math.cos(angle);
                     
-                    marker.style.left = `${x1}px`;
-                    marker.style.top = `${y1}px`;
                     marker.style.width = '2px';
-                    marker.style.height = `${Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1))}px`;
-                    marker.style.transform = `translate(-50%, 0) rotate(${i * 6 + 90}deg)`;
+                    marker.style.height = `${length}px`;
+                    marker.style.left = `${centerX}px`;
+                    marker.style.top = `${centerY}px`;
+                    marker.style.transform = `translate(-50%, 0) rotate(${i * 6}deg)`;
                     marker.style.transformOrigin = '50% 0';
                     
                     minuteMarkersContainer.appendChild(marker);
