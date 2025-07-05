@@ -47,64 +47,91 @@
         
         @media (max-width: 768px) {
             .clock-container {
-                width: 90vw;
-                height: 90vw;
+                width: 90vw !important;
+                height: 90vw !important;
             }
             
             .hour-hand {
-                width: 4px;
-                height: 120px;
-                transform-origin: 50% 75%;
-                transform: translate(-50%, -75%);
+                width: 4px !important;
+                height: 120px !important;
+                transform-origin: 50% 75% !important;
             }
             
             .minute-hand {
-                width: 3px;
-                height: 150px;
-                transform-origin: 50% 73%;
-                transform: translate(-50%, -73%);
+                width: 3px !important;
+                height: 150px !important;
+                transform-origin: 50% 73% !important;
             }
             
             .second-hand {
-                width: 1px;
-                height: 160px;
-                transform-origin: 50% 70%;
-                transform: translate(-50%, -70%);
+                width: 1px !important;
+                height: 160px !important;
+                transform-origin: 50% 70% !important;
             }
             
             .clock-center {
-                width: 15px;
-                height: 15px;
+                width: 15px !important;
+                height: 15px !important;
             }
             
             .number {
-                font-size: 24px;
+                font-size: 24px !important;
             }
             
             .hour-number {
-                font-size: 30px;
+                font-size: 30px !important;
             }
             
             .help-button {
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
-                bottom: 15px;
-                right: 15px;
+                width: 40px !important;
+                height: 40px !important;
+                font-size: 20px !important;
+                bottom: 15px !important;
+                right: 15px !important;
             }
             
             .modal-content {
-                padding: 20px;
-                margin: 15px;
-                max-width: 350px;
+                padding: 20px !important;
+                margin: 15px !important;
+                max-width: 350px !important;
             }
             
             .modal h2 {
-                font-size: 20px;
+                font-size: 20px !important;
             }
             
             .modal p {
-                font-size: 14px;
+                font-size: 14px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .clock-container {
+                width: 95vw !important;
+                height: 95vw !important;
+            }
+            
+            .hour-hand {
+                width: 3px !important;
+                height: 100px !important;
+            }
+            
+            .minute-hand {
+                width: 2px !important;
+                height: 130px !important;
+            }
+            
+            .second-hand {
+                width: 1px !important;
+                height: 140px !important;
+            }
+            
+            .hour-number {
+                font-size: 26px !important;
+            }
+            
+            .number {
+                font-size: 20px !important;
             }
         }
         
@@ -423,21 +450,90 @@
             
             // スマホサイズかどうかを判定
             const isMobile = window.innerWidth <= 768;
+            const isSmallMobile = window.innerWidth <= 480;
             
-            if (isMobile) {
-                document.getElementById('hourHand').style.transform = 
-                    `translate(-50%, -75%) rotate(${hourAngle}deg)`;
-                document.getElementById('minuteHand').style.transform = 
-                    `translate(-50%, -73%) rotate(${minuteAngle}deg)`;
-                document.getElementById('secondHand').style.transform = 
-                    `translate(-50%, -70%) rotate(${secondAngle}deg)`;
+            const hourHand = document.getElementById('hourHand');
+            const minuteHand = document.getElementById('minuteHand');
+            const secondHand = document.getElementById('secondHand');
+            
+            if (isSmallMobile) {
+                hourHand.style.cssText = `
+                    position: absolute;
+                    width: 3px;
+                    height: 100px;
+                    background: #333;
+                    border-radius: 3px;
+                    top: 50%;
+                    left: 50%;
+                    transform-origin: 50% 75%;
+                    transform: translate(-50%, -75%) rotate(${hourAngle}deg);
+                    z-index: 3;
+                `;
+                minuteHand.style.cssText = `
+                    position: absolute;
+                    width: 2px;
+                    height: 130px;
+                    background: #666;
+                    border-radius: 2px;
+                    top: 50%;
+                    left: 50%;
+                    transform-origin: 50% 73%;
+                    transform: translate(-50%, -73%) rotate(${minuteAngle}deg);
+                    z-index: 2;
+                `;
+                secondHand.style.cssText = `
+                    position: absolute;
+                    width: 1px;
+                    height: 140px;
+                    background: #e74c3c;
+                    border-radius: 1px;
+                    top: 50%;
+                    left: 50%;
+                    transform-origin: 50% 70%;
+                    transform: translate(-50%, -70%) rotate(${secondAngle}deg);
+                    z-index: 1;
+                `;
+            } else if (isMobile) {
+                hourHand.style.cssText = `
+                    position: absolute;
+                    width: 4px;
+                    height: 120px;
+                    background: #333;
+                    border-radius: 3px;
+                    top: 50%;
+                    left: 50%;
+                    transform-origin: 50% 75%;
+                    transform: translate(-50%, -75%) rotate(${hourAngle}deg);
+                    z-index: 3;
+                `;
+                minuteHand.style.cssText = `
+                    position: absolute;
+                    width: 3px;
+                    height: 150px;
+                    background: #666;
+                    border-radius: 2px;
+                    top: 50%;
+                    left: 50%;
+                    transform-origin: 50% 73%;
+                    transform: translate(-50%, -73%) rotate(${minuteAngle}deg);
+                    z-index: 2;
+                `;
+                secondHand.style.cssText = `
+                    position: absolute;
+                    width: 1px;
+                    height: 160px;
+                    background: #e74c3c;
+                    border-radius: 1px;
+                    top: 50%;
+                    left: 50%;
+                    transform-origin: 50% 70%;
+                    transform: translate(-50%, -70%) rotate(${secondAngle}deg);
+                    z-index: 1;
+                `;
             } else {
-                document.getElementById('hourHand').style.transform = 
-                    `translate(-50%, -80%) rotate(${hourAngle}deg)`;
-                document.getElementById('minuteHand').style.transform = 
-                    `translate(-50%, -77%) rotate(${minuteAngle}deg)`;
-                document.getElementById('secondHand').style.transform = 
-                    `translate(-50%, -75%) rotate(${secondAngle}deg)`;
+                hourHand.style.transform = `translate(-50%, -80%) rotate(${hourAngle}deg)`;
+                minuteHand.style.transform = `translate(-50%, -77%) rotate(${minuteAngle}deg)`;
+                secondHand.style.transform = `translate(-50%, -75%) rotate(${secondAngle}deg)`;
             }
         }
         
