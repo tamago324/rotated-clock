@@ -149,8 +149,8 @@
                 marker.style.borderRadius = '2px';
                 
                 const angle = (i * 30) * Math.PI / 180;
-                const innerRadius = containerSize * 0.38;
-                const outerRadius = containerSize * 0.48;
+                const innerRadius = containerSize * 0.44;  // 数字よりもっと外側から開始
+                const outerRadius = containerSize * 0.49;
                 
                 // 中心から外側に向かう線を描画
                 const length = outerRadius - innerRadius;
@@ -176,8 +176,8 @@
                     marker.style.borderRadius = '1px';
                     
                     const angle = (i * 6) * Math.PI / 180;
-                    const innerRadius = containerSize * 0.44;
-                    const outerRadius = containerSize * 0.48;
+                    const innerRadius = containerSize * 0.46;  // 分の目盛りも外側に
+                    const outerRadius = containerSize * 0.49;
                     
                     // 中心から外側に向かう線を描画
                     const length = outerRadius - innerRadius;
