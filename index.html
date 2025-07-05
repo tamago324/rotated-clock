@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>90度回転時計</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            overflow: hidden;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .clock-container {
+            width: min(80vh, 80vw);
+            height: min(80vh, 80vw);
+            position: relative;
+            max-width: 800px;
+            max-height: 800px;
+        }
+        
+        @media (min-width: 1920px) and (min-height: 1080px) {
+            .clock-container {
+                width: 800px;
+                height: 800px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .clock-container {
+                width: 90vw;
+                height: 90vw;
+            }
+        }
+        
+        .clock-face {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            box-shadow: 
+                20px 20px 60px #bebebe,
+                -20px -20px 60px #ffffff;
+            position: relative;
+        }
+        
+        .clock-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: #333;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+        
+        .hour-hand {
+            position: absolute;
+            width: 6px;
+            height: 180px;
+            background: #333;
+            border-radius: 3px;
+            top: 50%;
+            left: 50%;
+            transform-origin: 50% 80%;
+            transform: translate(-50%, -80%);
+            z-index: 3;
+        }
+        
+        .minute-hand {
+            position: absolute;
+            width: 4px;
+            height: 220px;
+            background: #666;
+            border-radius: 2px;
+            top: 50%;
+            left: 50%;
+            transform-origin: 50% 77%;
+            transform: translate(-50%, -77%);
+            z-index: 2;
+        }
+        
+        .second-hand {
+            position: absolute;
+            width: 2px;
+            height: 240px;
+            background: #e74c3c;
+            border-radius: 1px;
+            top: 50%;
+            left: 50%;
+            transform-origin: 50% 75%;
+            transform: translate(-50%, -75%);
+            z-index: 1;
+        }
+        
+        .hour-marker {
+            position: absolute;
+            width: 4px;
+            height: 40px;
+            background: #333;
+            border-radius: 2px;
+            top: 20px;
+            left: 50%;
+            transform-origin: 50% 280px;
+            transform: translateX(-50%);
+        }
+        
+        .minute-marker {
+            position: absolute;
+            width: 2px;
+            height: 20px;
+            background: #666;
+            border-radius: 1px;
+            top: 30px;
+            left: 50%;
+            transform-origin: 50% 270px;
+            transform: translateX(-50%);
+        }
+        
+        .number {
+            position: absolute;
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .rotated-number {
+            transform: rotate(90deg);
+        }
+        
+        .normal-number {
+            transform: none;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-400 to-purple-500">
+    <div class="clock-container">
+        <div class="clock-face">
+            <div class="clock-center"></div>
+            
+            <div class="hour-hand" id="hourHand"></div>
+            <div class="minute-hand" id="minuteHand"></div>
+            <div class="second-hand" id="secondHand"></div>
+            
+            <div id="hourMarkers"></div>
+            <div id="minuteMarkers"></div>
+            <div id="numbers"></div>
+        </div>
+    </div>
+    
+    <script>
+        function initializeClock() {
+            createMarkers();
+            createNumbers();
+            updateClock();
+            setInterval(updateClock, 1000);
+        }
+        
+        function createMarkers() {
+            const hourMarkersContainer = document.getElementById('hourMarkers');
+            const minuteMarkersContainer = document.getElementById('minuteMarkers');
+            
+            for (let i = 0; i < 12; i++) {
+                const marker = document.createElement('div');
+                marker.className = 'hour-marker';
+                marker.style.transform = `translateX(-50%) rotate(${i * 30}deg)`;
+                hourMarkersContainer.appendChild(marker);
+            }
+            
+            for (let i = 0; i < 60; i++) {
+                if (i % 5 !== 0) {
+                    const marker = document.createElement('div');
+                    marker.className = 'minute-marker';
+                    marker.style.transform = `translateX(-50%) rotate(${i * 6}deg)`;
+                    minuteMarkersContainer.appendChild(marker);
+                }
+            }
+        }
+        
+        function createNumbers() {
+            const numbersContainer = document.getElementById('numbers');
+            
+            for (let i = 1; i <= 12; i++) {
+                const number = document.createElement('div');
+                number.className = 'number';
+                number.textContent = i;
+                
+                const angle = (i * 30 - 90) * Math.PI / 180;
+                const radius = 240;
+                const x = radius * Math.cos(angle);
+                const y = radius * Math.sin(angle);
+                
+                number.style.left = `calc(50% + ${x}px - 16px)`;
+                number.style.top = `calc(50% + ${y}px - 20px)`;
+                
+                number.classList.add('rotated-number');
+                
+                numbersContainer.appendChild(number);
+            }
+            
+            for (let i = 1; i <= 12; i++) {
+                const minuteNumber = document.createElement('div');
+                minuteNumber.className = 'number';
+                minuteNumber.style.fontSize = '20px';
+                minuteNumber.style.color = '#888';
+                minuteNumber.textContent = i * 5;
+                
+                const angle = (i * 30 - 90) * Math.PI / 180;
+                const radius = 200;
+                const x = radius * Math.cos(angle);
+                const y = radius * Math.sin(angle);
+                
+                minuteNumber.style.left = `calc(50% + ${x}px - 12px)`;
+                minuteNumber.style.top = `calc(50% + ${y}px - 15px)`;
+                minuteNumber.classList.add('normal-number');
+                
+                numbersContainer.appendChild(minuteNumber);
+            }
+        }
+        
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours() % 12;
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+            
+            const hourAngle = (hours * 30) + (minutes * 0.5) + 90;
+            const minuteAngle = (minutes * 6) + (seconds * 0.1);
+            const secondAngle = seconds * 6;
+            
+            document.getElementById('hourHand').style.transform = 
+                `translate(-50%, -80%) rotate(${hourAngle}deg)`;
+            document.getElementById('minuteHand').style.transform = 
+                `translate(-50%, -77%) rotate(${minuteAngle}deg)`;
+            document.getElementById('secondHand').style.transform = 
+                `translate(-50%, -75%) rotate(${secondAngle}deg)`;
+        }
+        
+        document.addEventListener('DOMContentLoaded', initializeClock);
+    </script>
+</body>
+</html>
