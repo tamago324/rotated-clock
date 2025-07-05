@@ -230,27 +230,6 @@
                 numbersContainer.appendChild(number);
             }
             
-            // 通常の分の数字（5,10,15...）
-            for (let i = 1; i <= 12; i++) {
-                const minuteNumber = document.createElement('div');
-                minuteNumber.className = 'number';
-                minuteNumber.style.fontSize = '20px';
-                minuteNumber.style.color = '#888';
-                minuteNumber.textContent = i === 12 ? 60 : i * 5;
-                
-                // 通常の位置計算（分の数字）
-                const angle = (i * 30 - 90) * Math.PI / 180;
-                const radius = containerSize * 0.28; // 時計の28%の位置（内側に移動）
-                const x = centerOffset + radius * Math.cos(angle);
-                const y = centerOffset + radius * Math.sin(angle);
-                
-                minuteNumber.style.position = 'absolute';
-                minuteNumber.style.left = `${x}px`;
-                minuteNumber.style.top = `${y}px`;
-                minuteNumber.style.transform = 'translate(-50%, -50%)';
-                
-                numbersContainer.appendChild(minuteNumber);
-            }
         }
         
         function updateClock() {
