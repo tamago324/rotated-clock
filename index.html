@@ -8,13 +8,13 @@
     <style>
         body {
             overflow: hidden;
-            background: radial-gradient(circle at center, #667eea 0%, #764ba2 100%);
             margin: 0;
             padding: 0;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            transition: background 2s ease;
         }
         
         .clock-container {
@@ -232,11 +232,33 @@
             
         }
         
+        function updateBackground(hours) {
+            const body = document.body;
+            
+            if (hours >= 6 && hours < 12) {
+                // 朝（6-12時）: オレンジ・黄色系
+                body.style.background = 'radial-gradient(circle at center, #ffeaa7 0%, #fab1a0 100%)';
+            } else if (hours >= 12 && hours < 18) {
+                // 昼（12-18時）: 青・水色系
+                body.style.background = 'radial-gradient(circle at center, #74b9ff 0%, #0984e3 100%)';
+            } else if (hours >= 18 && hours < 22) {
+                // 夕方（18-22時）: オレンジ・赤系
+                body.style.background = 'radial-gradient(circle at center, #fd79a8 0%, #e84393 100%)';
+            } else {
+                // 夜（22-6時）: 濃い青・紫系
+                body.style.background = 'radial-gradient(circle at center, #667eea 0%, #764ba2 100%)';
+            }
+        }
+        
         function updateClock() {
             const now = new Date();
             const hours = now.getHours() % 12;
             const minutes = now.getMinutes();
             const seconds = now.getSeconds();
+            const fullHours = now.getHours();
+            
+            // 背景を時間に応じて更新
+            updateBackground(fullHours);
             
             const hourAngle = (hours * 30) + (minutes * 0.5) + 90;
             const minuteAngle = (minutes * 6) + (seconds * 0.1);
