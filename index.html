@@ -214,7 +214,7 @@
                 const adjustedPosition = rotatedPosition === 0 ? 12 : rotatedPosition;
                 
                 const angle = (adjustedPosition * 30 - 90) * Math.PI / 180;
-                const radius = containerSize * 0.40; // 時計の40%の位置
+                const radius = containerSize * 0.36; // 時計の36%の位置（内側に移動）
                 const x = centerOffset + radius * Math.cos(angle);
                 const y = centerOffset + radius * Math.sin(angle);
                 
@@ -236,7 +236,7 @@
                 
                 // 通常の位置計算（分の数字）
                 const angle = (i * 30 - 90) * Math.PI / 180;
-                const radius = containerSize * 0.32; // 時計の32%の位置
+                const radius = containerSize * 0.28; // 時計の28%の位置（内側に移動）
                 const x = centerOffset + radius * Math.cos(angle);
                 const y = centerOffset + radius * Math.sin(angle);
                 
