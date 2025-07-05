@@ -50,6 +50,62 @@
                 width: 90vw;
                 height: 90vw;
             }
+            
+            .hour-hand {
+                width: 4px;
+                height: 120px;
+                transform-origin: 50% 75%;
+                transform: translate(-50%, -75%);
+            }
+            
+            .minute-hand {
+                width: 3px;
+                height: 150px;
+                transform-origin: 50% 73%;
+                transform: translate(-50%, -73%);
+            }
+            
+            .second-hand {
+                width: 1px;
+                height: 160px;
+                transform-origin: 50% 70%;
+                transform: translate(-50%, -70%);
+            }
+            
+            .clock-center {
+                width: 15px;
+                height: 15px;
+            }
+            
+            .number {
+                font-size: 24px;
+            }
+            
+            .hour-number {
+                font-size: 30px;
+            }
+            
+            .help-button {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .modal-content {
+                padding: 20px;
+                margin: 15px;
+                max-width: 350px;
+            }
+            
+            .modal h2 {
+                font-size: 20px;
+            }
+            
+            .modal p {
+                font-size: 14px;
+            }
         }
         
         .clock-face {
@@ -365,12 +421,24 @@
             const minuteAngle = (minutes * 6) + (seconds * 0.1);
             const secondAngle = seconds * 6;
             
-            document.getElementById('hourHand').style.transform = 
-                `translate(-50%, -80%) rotate(${hourAngle}deg)`;
-            document.getElementById('minuteHand').style.transform = 
-                `translate(-50%, -77%) rotate(${minuteAngle}deg)`;
-            document.getElementById('secondHand').style.transform = 
-                `translate(-50%, -75%) rotate(${secondAngle}deg)`;
+            // スマホサイズかどうかを判定
+            const isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                document.getElementById('hourHand').style.transform = 
+                    `translate(-50%, -75%) rotate(${hourAngle}deg)`;
+                document.getElementById('minuteHand').style.transform = 
+                    `translate(-50%, -73%) rotate(${minuteAngle}deg)`;
+                document.getElementById('secondHand').style.transform = 
+                    `translate(-50%, -70%) rotate(${secondAngle}deg)`;
+            } else {
+                document.getElementById('hourHand').style.transform = 
+                    `translate(-50%, -80%) rotate(${hourAngle}deg)`;
+                document.getElementById('minuteHand').style.transform = 
+                    `translate(-50%, -77%) rotate(${minuteAngle}deg)`;
+                document.getElementById('secondHand').style.transform = 
+                    `translate(-50%, -75%) rotate(${secondAngle}deg)`;
+            }
         }
         
         function showModal() {
@@ -391,6 +459,7 @@
             document.getElementById('numbers').innerHTML = '';
             createMarkers();
             createNumbers();
+            updateClock(); // 針の位置も再調整
         });
         
         // ESCキーでモーダルを閉じる
