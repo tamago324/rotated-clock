@@ -1,10 +1,10 @@
 const CACHE_NAME = 'rotated-clock-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/icon-192.png',
-  '/icon-512.png',
+  '/rotated-clock/',
+  '/rotated-clock/index.html',
+  '/rotated-clock/manifest.json',
+  '/rotated-clock/clock_icon_192.png',
+  '/rotated-clock/clock_icon_512.png',
   'https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap',
   'https://fonts.gstatic.com/s/nunito/v20/XRXV3I6Li01BKofIOuaBXso.woff2'
 ];
