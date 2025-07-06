@@ -2,21 +2,21 @@
   "name": "90度回転時計",
   "short_name": "回転時計",
   "description": "時間を大切にするための特別な時計 - 90度回転表示",
-  "start_url": "/",
+  "start_url": "/rotated-clock/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#667eea",
   "orientation": "any",
-  "scope": "/",
+  "scope": "/rotated-clock/",
   "categories": ["productivity", "utilities"],
   "icons": [
     {
-      "src": "clock_icon_192.png",
+      "src": "/rotated-clock/clock_icon_192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "clock_icon_512.png",
+      "src": "/rotated-clock/clock_icon_512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
